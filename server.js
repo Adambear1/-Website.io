@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const fs = require('fs')
 
+var PORT = process.env.PORT || 3000;
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
@@ -53,7 +55,7 @@ app.post('/api/input', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log(`App listening on PORT 3000`)
 })
 
