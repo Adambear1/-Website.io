@@ -1,0 +1,23 @@
+{
+  "name": "website.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "logic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adambear1/Website.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adambear1/Website.io/issues"
+  },
+  "homepage": "https://github.com/Adambear1/Website.io#readme",
+  "dependencies": {
+    "nodemon": "^2.0.3"
+  }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Property</title>
+        <link rel="stylesheet" href="../assets/style.css">
+        <script src="https://kit.fontawesome.com/a9f3433135.js"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous">
+        <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+        <script src="../logic.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            Property Add Form
+                        </div>
+                        <div class="card-body">
+                            <div class="slide-one">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="reserve-name">Address</label>
+                                        <input type="text" class="form-control"
+                                            id="input-address">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reserve-phone">City</label>
+                                        <input type="text" class="form-control"
+                                            id="input-city">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reserve-phone">NWMLS #</label>
+                                        <input type="text" class="form-control"
+                                            id="input-nwmlsID">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reserve-email">Zip Code</label>
+                                        <input type="text" class="form-control"
+                                            id="input-zipCode">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reserve-unique-id">NWMLS
+                                            Area</label>
+                                        <input type="text" class="form-control"
+                                            id="input-nwmlsArea">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reserve-unique-id">Estimated
+                                            Rehab Cost</label>
+                                        <input type="text" class="form-control"
+                                            id="input-rehabcost">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reserve-unique-id">Estimated
+                                            Resale Price</label>
+                                        <input type="text" class="form-control"
+                                            id="input-resaleprice">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a href="/"><i class="fa
+                                                fa-paper-plane fa-2x exit"
+                                                aria-hidden="true"></i></a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a><i class="fas fa-plus fa-2x submit"
+                                                style='color:
+                                                rgb(3, 123, 235)'></i></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+
+    <script type='text/javascript'>
+
+    $('.submit').on('click', (e)=>{
+        //Create Object of Values
+        e.preventDefault();
+        var house = {
+            Address: $('#input-address').val().toUpperCase().trim(),
+            City: $('#input-city').val().toUpperCase().trim(),
+            NWMLSID: $('#input-nwmlsID').val().trim(),
+            ZipCode: $('#input-zipCode').val().trim(),
+            NWMLSArea: $('#input-nwmlsArea').val().trim(),  
+            rehabPrice: $('#input-rehabcost').val().trim(),  
+            resalePrice: $('#input-resaleprice').val().trim()
+        };
+        //Clear Input
+        $('#input-address').val('');
+        $('#input-city').val('');
+        $('#input-nwmlsID').val('');
+        $('#input-zipCode').val('');
+        $('#input-nwmlsArea').val('');   
+        $('#input-rehabcost').val('');  
+        $('#input-resaleprice').val('');
+        //Post Data to Route
+        $.post('/api/input', house).then(data => {
+                console.log('data submitted:', data)
+                alert('submitted')
+        })
+    })
+
+
+   
+   
+    </script>
+</html>
