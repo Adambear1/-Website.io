@@ -59,17 +59,6 @@ app.post('/api/input', (req, res) => {
             (1000) - houseInput.rehabPrice
         )
     }
-    // houseInput.equity = Math.floor(
-    //     ((houseInput.resalePrice))
-    //     -
-    //     (houseInput.purchasePrice)
-    //     -
-    //     (houseInput.purchasePrice * 0.12)
-    //     -
-    //     -(0.0068 * -(houseInput.purchasePrice - (houseInput.purchasePrice * 0.12) - (1000) - houseInput.rehabPrice) + 70)
-    //     -
-    //     (1000) - houseInput.rehabPrice
-    // )
 
     houseInput.operatingCosts = ((houseInput.purchasePrice * .15) + (1000) + (-(.0068 * -(houseInput.purchasePrice - (houseInput.purchasePrice * 12) - (1000) - (houseInput.rehabPrice) - (1000 * 4.5)))) + +houseInput.rehabPrice)
 

@@ -25,10 +25,15 @@ display: none !important;
 visibility: hidden !important;
 }
 
-.card {
-    transition: all .5s linear ;
+.newinfo{
+    font-size: 10px !important;
 }
 
-.fade_out {
-    opacity: .1;
+.card-main {
+    /* position: absolute; */
+    z-index: 9;
+}
+
+.card-header {
+    cursor: move;
 }
