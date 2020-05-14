@@ -29,21 +29,51 @@ app.post('/api/input', (req, res) => {
     var houseInput = req.body;
     console.log(houseInput)
     houseInput.routeName = houseInput.Address.replace(/\s+/g, "").toLowerCase();
-    houseInput.purchasePrice = Math.floor((houseInput.resalePrice - (houseInput.resalePrice * 0.12)
-        - (0.0068 * -(houseInput.resalePrice - (houseInput.resalePrice * 0.12) - ((3000 / 365) * 120) - ((100 / 365) * 120) - houseInput.rehabPrice) + 70)
-        - ((3000 / 365) * 120) - ((100 / 365) * 120) - houseInput.rehabPrice
-        * (1 + (-0.18 - 0.03))))
+    houseInput.purchasePrice = Math.floor(((houseInput.resalePrice - (houseInput.resalePrice * 0.12)
+        - (0.0068 * -(houseInput.resalePrice - (houseInput.resalePrice * 0.12) - (1000) - ((100 / 365) * 120) - houseInput.rehabPrice) + 70)
+        - (1000) - ((100 / 365) * 120) - houseInput.rehabPrice)
+        * (1 + (-0.20))))
+    // 
+    if (houseInput.pp === "" || houseInput.pp === undefined) {
+        houseInput.equity = Math.floor(
+            ((houseInput.resalePrice))
+            -
+            (houseInput.purchasePrice)
+            -
+            (houseInput.purchasePrice * 0.12)
+            -
+            -(0.0068 * -(houseInput.purchasePrice - (houseInput.purchasePrice * 0.12) - (1000) - houseInput.rehabPrice) + 70)
+            -
+            (1000) - houseInput.rehabPrice
+        )
+    } else {
+        houseInput.equity = Math.floor(
+            ((houseInput.resalePrice))
+            -
+            (+houseInput.pp)
+            -
+            (+houseInput.pp * 0.12)
+            -
+            -(0.0068 * -(+houseInput.pp - (+houseInput.pp * 0.12) - (1000) - houseInput.rehabPrice) + 70)
+            -
+            (1000) - houseInput.rehabPrice
+        )
+    }
+    // houseInput.equity = Math.floor(
+    //     ((houseInput.resalePrice))
+    //     -
+    //     (houseInput.purchasePrice)
+    //     -
+    //     (houseInput.purchasePrice * 0.12)
+    //     -
+    //     -(0.0068 * -(houseInput.purchasePrice - (houseInput.purchasePrice * 0.12) - (1000) - houseInput.rehabPrice) + 70)
+    //     -
+    //     (1000) - houseInput.rehabPrice
+    // )
 
-    houseInput.equity = Math.floor((houseInput.purchasePrice - (houseInput.purchasePrice * 0.12)
-        - (0.0068 * -(houseInput.purchasePrice - (houseInput.purchasePrice * 0.12) - ((3000 / 365) * 120) - ((10 / 365) * 120) - houseInput.rehabPrice) + 70)
-        - ((3000 / 365) * 120) - ((10 / 365) * 120) - houseInput.rehabPrice)
-        * (1 + (-0.18 + 0.03)))
-        -
-        (houseInput.purchasePrice * 0.12)
-        -
-        -(0.0068 * -(houseInput.purchasePrice - (houseInput.purchasePrice * 0.12) - ((3000 / 365) * 120) - ((10 / 365) * 120) - houseInput.rehabPrice) + 70)
-        -
-        ((3000 / 365) * 120) - ((10 / 365) * 120) - houseInput.rehabPrice
+    houseInput.operatingCosts = ((houseInput.purchasePrice * .15) + (1000) + (-(.0068 * -(houseInput.purchasePrice - (houseInput.purchasePrice * 12) - (1000) - (houseInput.rehabPrice) - (1000 * 4.5)))) + +houseInput.rehabPrice)
+
+    houseInput.ROI = (((+houseInput.equity + +houseInput.operatingCosts) / +houseInput.operatingCosts) * 100).toFixed(2)
 
     fs.readFile('db.json', 'utf-8', (err, data) => {
         var houseStore = JSON.parse(data);

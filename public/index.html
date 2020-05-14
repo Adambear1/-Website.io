@@ -20,39 +20,63 @@
         <div class="container">
             <div class="row">
                 <div class="col col-4">
-                    <div class="card-container"></div>
+                    <div class="card-container list"></div>
                 </div>
             </div>
         </div>
-
+        <i class="far fa-folder-open archieve fa-4x" style='color:
+            rgb(3, 123, 235)'></i>
     </body>
 
     <script type='text/javascript'>
-     $(document).ready((e) => {
-        console.log('hello')
-    //    const cc = document.querySelector('.card-container')
-       const col = document.querySelector('.col')
+    //  $(document).ready((e) => {
         $.get('/api/input', (data) =>{
             if (data) {
                 var sortedData = data.sort((a, b) => {b.equity, a.equity})
                 console.log(sortedData)
                 sortedData.forEach(property => {
                 const card  = `
-                <div class="card text-center" style="width: 18rem;">
-                    <div class="card-body">
+                <div class="card text-center" style="width: 18rem;" draggable="true">
+                    <div class="card-body" draggable="true">
                         <h5 class="card-title">${property.Address}, ${property.City}, WA ${property.ZipCode}</h5>
                         <p class="card-text">NWMLS ID:${property.NWMLSID}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div  class="badge badge-info" ondblclick="dbl()">Puchase Price: $${
+                            property.pp === "" ? (+property.purchasePrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') :  (+property.pp).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                        }</div >
+                        <div  class="badge badge-warning">Total Operating Costs: $${(+property.operatingCosts).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div >
+                        <div  class="badge badge-warning" style='opacity: 50%'>Rehab Costs: $${(+property.rehabPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div >
+                        <div  class="badge badge-info">Est. Resale Price: $${(+property.resalePrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div >
+                        <div  class="badge badge-success">Net Profit: $${(property.equity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div >
                     </div>
                 </div>`
-                col.innerHTML += card
-        })
+                document.querySelector('.col').innerHTML += card;
+                })
             }  
+        })
+    // })   
+function dbl(){
+    event.target.innerHTML = ''
+    event.target.innerHTML = '<div class="badge badge-info">Purchase Price: <input type="text" onkeyup="enter()" placeholder="Enter new price"></input></div>'
 }
+var newInput = 5652
 
+function enter(){
+    event.target.parentElement.innerHTML = `<div class="badge badge-info" ondblclick="dbl()">Purchase Price: ${(newInput).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div>`
+    console.log(event.target.parentElement)
+    if(event.target.value.length == 6 || event.target.value.length == "6"){
+        event.target.parentElement.innerHTML = `Purchase Price:`
+        // event.target.remove()
+        // event.target.disabled = true;
         
-     )})
-    
+        // event.target.replaceWith(`<div class="badge badge-info" ondblclick="dbl()">Purchase Price: ${(newInput).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div>`)
+    } else {
+        console.log('no')
+    }
+    // event.srcElement.innerHTML = 'HellO!'
+    // event.target.innerHTML = `<div class="badge badge-info" ondblclick="dbl()">Purchase Price: ${(newInput).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div>`
+    // console.log(event.target)
+    // console.log(newInput)  
+}
 
     </script>
 </html>

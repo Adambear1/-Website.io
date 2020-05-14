@@ -53,6 +53,13 @@
                                             id="input-nwmlsArea">
                                     </div>
                                     <div class="form-group">
+                                        <label for="reserve-unique-id">Purchase
+                                            Price***
+                                        </label>
+                                        <input type="text" class="form-control"
+                                            id="input-pp">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="reserve-unique-id">Estimated
                                             Rehab Cost</label>
                                         <input type="text" class="form-control"
@@ -98,6 +105,7 @@
             NWMLSID: $('#input-nwmlsID').val().trim(),
             ZipCode: $('#input-zipCode').val().trim(),
             NWMLSArea: $('#input-nwmlsArea').val().trim(),  
+            pp: $('#input-pp').val().trim(),
             rehabPrice: $('#input-rehabcost').val().trim(),  
             resalePrice: $('#input-resaleprice').val().trim()
         };
@@ -106,7 +114,8 @@
         $('#input-city').val('');
         $('#input-nwmlsID').val('');
         $('#input-zipCode').val('');
-        $('#input-nwmlsArea').val('');   
+        $('#input-nwmlsArea').val(''); 
+        $('#input-pp').val('');
         $('#input-rehabcost').val('');  
         $('#input-resaleprice').val('');
         //Post Data to Route

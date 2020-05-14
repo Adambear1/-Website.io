@@ -2,18 +2,6 @@
 box-sizing: border-box;
 }
 
-/* .col {
-position: absolute;
-opacity: 0;
-font-size: 1.5em;
-top: 0;
-left: 0;
-height: 100%;
-width: 100%;
-transform: translateX(50%) rotateY(-10deg);
-transition: transform 0.4s ease, opacity 0.4s ease;
-} */
-
 .fa-paper-plane {
 justify-content: center;
 text-align: center;
@@ -22,6 +10,25 @@ margin-left: auto !important;
 margin-right: auto !important;
 }
 
+.archieve {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+}
+
+.hold {
+    border: solid #ccc 4px;
+}
+
 .hidden {
 display: none !important;
+visibility: hidden !important;
+}
+
+.card {
+    transition: all .5s linear ;
+}
+
+.fade_out {
+    opacity: .1;
 }
